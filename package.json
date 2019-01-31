@@ -19,7 +19,7 @@
     "eslint-config-ybiquitous": "^7.1.0",
     "stylelint": "^9.10.1",
     "tape": "^4.9.2",
-    "ybiq": "^6.0.0"
+    "ybiq": "^7.0.0"
   },
   "scripts": {
     "pretest": "npm run lint",
