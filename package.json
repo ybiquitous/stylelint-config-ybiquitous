@@ -24,13 +24,16 @@
   "scripts": {
     "pretest": "npm run lint",
     "test": "node test.js",
-    "format": "npm-run-all --print-label --parallel lint:js:fix prettier:write",
+    "format": "npm-run-all --print-label --parallel lint:*:fix prettier:write",
     "lint": "npm-run-all --print-label --parallel lint:*",
     "lint:js": "eslint --ignore-path .gitignore --ext .js,.jsx,.mjs .",
     "lint:js:fix": "npm run lint:js -- --fix",
-    "lint:md": "markdownlint --ignore node_modules --ignore CHANGELOG.md \"**/*.md\"",
-    "prettier:write": "prettier --write --ignore-path .gitignore \"**/*.{html,json,md,yaml,yml}\"",
-    "release": "standard-version --sign",
+    "lint:md": "remark . --frail",
+    "lint:md:fix": "npm run lint:md -- --output",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.{css,html,js,json,jsx,md,mjs,scss,yaml,yml}\"",
+    "prettier:write": "npm run prettier -- --write",
+    "prettier:check": "npm run prettier -- --check",
+    "release": "standard-version --sign --no-verify",
     "release:dry-run": "npm run release -- --dry-run"
   },
   "husky": {
@@ -46,7 +49,8 @@
         "git add"
       ],
       "*.md": [
-        "markdownlint --ignore CHANGELOG.md"
+        "remark --output",
+        "git add"
       ],
       "*.{html,json,md,yaml,yml}": [
         "prettier --write",
