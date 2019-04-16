@@ -17,7 +17,7 @@ const byLineAndColumn = (a, b) => {
   return 0;
 };
 
-test("test", async t => {
+test("rules", async t => {
   const result = await stylelint.lint({
     configFile: "index.js",
     code: `
@@ -43,6 +43,30 @@ a.cls {
       rule: "declaration-property-value-whitelist",
       severity: "error",
       text: 'Give the unitless value for "line-height". See https://mzl.la/2TflJo5',
+    },
+  ]);
+  t.end();
+});
+
+test("a11y", async t => {
+  const result = await stylelint.lint({
+    configFile: "index.js",
+    code: `
+.foo:focus {
+  outline: 0;
+}
+`,
+  });
+
+  t.is(result.errored, true);
+  t.is(result.results.length, 1);
+  t.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
+    {
+      line: 4,
+      column: 85,
+      rule: "a11y/no-outline-none",
+      severity: "error",
+      text: 'Unexpected using "outline" property in .foo:focus (a11y/no-outline-none)',
     },
   ]);
   t.end();
