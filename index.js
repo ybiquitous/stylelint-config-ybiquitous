@@ -1,4 +1,3 @@
-/* eslint sort-keys: "error" */
 module.exports = {
   extends: ["stylelint-config-standard", "stylelint-a11y/recommended"],
 
