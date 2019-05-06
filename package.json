@@ -67,6 +67,16 @@
   "eslintConfig": {
     "extends": [
       "ybiquitous/node"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "index.js"
+        ],
+        "rules": {
+          "sort-keys": "error"
+        }
+      }
     ]
   },
   "commitlint": {
