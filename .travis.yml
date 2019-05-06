@@ -1,7 +1,12 @@
 language: node_js
 
-script:
-  - commitlint-travis
-  - npm run prettier:check
-  - npm run release:dry-run
-  - npm test
+matrix:
+  include:
+    - node_js: 12
+      script:
+        - commitlint-travis
+        - npm run prettier:check
+        - npm run release:dry-run
+        - npm test
+    - node_js: 10
+      script: npm test
