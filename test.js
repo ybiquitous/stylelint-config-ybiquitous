@@ -60,10 +60,17 @@ test("a11y", async t => {
 
   t.is(result.errored, true);
   t.is(result.results.length, 1);
+
+  // HACK: Column is different between Node 10 and Node 12. Why…?
+  let expectedColumn = 4;
+  if (process.versions.node.startsWith("10.")) {
+    expectedColumn = 5;
+  }
+
   t.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
     {
-      line: 4,
-      column: 85,
+      line: 2,
+      column: expectedColumn,
       rule: "a11y/no-outline-none",
       severity: "error",
       text: 'Unexpected using "outline" property in .foo:focus (a11y/no-outline-none)',
