@@ -22,14 +22,14 @@
     "stylelint-a11y": "^1.2.0",
     "stylelint-config-standard": "^18.3.0",
     "tape": "^4.10.2",
-    "ybiq": "^7.3.0"
+    "ybiq": "^8.0.0"
   },
   "scripts": {
     "pretest": "npm run lint",
     "test": "node test.js",
     "format": "npm-run-all --print-label --parallel lint:*:fix prettier:write",
     "lint": "npm-run-all --print-label --parallel lint:*",
-    "lint:js": "eslint --ignore-path .gitignore --ext .js,.jsx,.mjs .",
+    "lint:js": "eslint --ignore-path .gitignore --ext .js,.jsx,.mjs,.ts,.tsx .",
     "lint:js:fix": "npm run lint:js -- --fix",
     "lint:md": "remark . --frail",
     "lint:md:fix": "remark . --output",
@@ -47,13 +47,12 @@
   },
   "lint-staged": {
     "linters": {
-      "*.{js,jsx,mjs}": [
+      "*.{js,jsx,mjs,ts,tsx}": [
         "eslint --fix --no-ignore",
         "git add"
       ],
       "*.md": [
-        "remark --output --",
-        "git add"
+        "remark --frail"
       ],
       "*.{css,html,js,json,jsx,md,mjs,scss,ts,tsx,yaml,yml}": [
         "prettier --write",
@@ -94,27 +93,17 @@
   },
   "remarkConfig": {
     "plugins": [
-      "remark-preset-lint-markdown-style-guide",
-      "remark-preset-lint-recommended",
-      "remark-lint-first-heading-level",
-      "remark-lint-no-tabs",
+      "preset-lint-recommended",
+      "lint-no-heading-punctuation",
       [
-        "remark-lint-emphasis-marker",
+        "lint-list-item-bullet-indent",
         false
       ],
       [
-        "remark-lint-list-item-indent",
+        "lint-list-item-indent",
         false
       ],
-      [
-        "remark-lint-list-item-spacing",
-        false
-      ],
-      [
-        "remark-lint-ordered-list-marker-value",
-        "ordered"
-      ],
-      "remark-validate-links"
+      "validate-links"
     ]
   }
 }
