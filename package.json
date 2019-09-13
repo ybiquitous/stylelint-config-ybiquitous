@@ -23,7 +23,7 @@
     "stylelint-a11y": "^1.2.1",
     "stylelint-config-standard": "^18.3.0",
     "tape": "^4.11.0",
-    "ybiq": "^8.0.0"
+    "ybiq": "^9.1.0"
   },
   "scripts": {
     "pretest": "npm run lint",
