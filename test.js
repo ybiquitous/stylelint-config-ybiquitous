@@ -62,7 +62,7 @@ test("a11y", async t => {
   t.is(result.results.length, 1);
 
   // HACK: Column is different between Node 10 and Node 12. Why…?
-  let expectedColumn = 4;
+  let expectedColumn = 6;
   if (process.versions.node.startsWith("10.")) {
     expectedColumn = 5;
   }
@@ -74,6 +74,46 @@ test("a11y", async t => {
       rule: "a11y/no-outline-none",
       severity: "error",
       text: 'Unexpected using "outline" property in .foo:focus (a11y/no-outline-none)',
+    },
+  ]);
+  t.end();
+});
+
+test("order", async t => {
+  const result = await stylelint.lint({
+    configFile: "index.js",
+    code: `
+a {
+  $foo: 1px;
+
+  --height: 10px;
+
+  span { /* empty */ }
+
+  @media (min-width: 100px) { /* empty */ }
+
+  color: pink;
+}
+`,
+  });
+
+  t.is(result.errored, true);
+  t.is(result.results.length, 1);
+
+  t.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
+    {
+      line: 5,
+      column: 3,
+      rule: "order/order",
+      severity: "error",
+      text: "Expected custom property to come before $-variable (order/order)",
+    },
+    {
+      line: 11,
+      column: 3,
+      rule: "order/order",
+      severity: "error",
+      text: "Expected declaration to come before at-rule (order/order)",
     },
   ]);
   t.end();

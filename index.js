@@ -1,6 +1,8 @@
 module.exports = {
   extends: ["stylelint-config-standard", "stylelint-a11y/recommended"],
 
+  plugins: ["stylelint-order"],
+
   rules: {
     "declaration-property-value-whitelist": [
       {
@@ -11,5 +13,8 @@ module.exports = {
       },
     ],
     "selector-no-qualifying-type": true,
+
+    // eslint-disable-next-line sort-keys
+    "order/order": ["custom-properties", "dollar-variables", "declarations", "rules", "at-rules"],
   },
 };
