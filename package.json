@@ -15,13 +15,15 @@
   "peerDependencies": {
     "stylelint": "11",
     "stylelint-a11y": "1",
-    "stylelint-config-standard": "19"
+    "stylelint-config-standard": "19",
+    "stylelint-order": "3"
   },
   "devDependencies": {
     "eslint-config-ybiquitous": "^10.1.0",
     "stylelint": "^11.1.1",
     "stylelint-a11y": "^1.2.2",
     "stylelint-config-standard": "^19.0.0",
+    "stylelint-order": "^3.1.1",
     "tape": "^4.11.0",
     "ybiq": "^9.1.0"
   },
@@ -103,5 +105,8 @@
       ],
       "validate-links"
     ]
+  },
+  "stylelint": {
+    "extends": "./index.js"
   }
 }
