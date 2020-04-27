@@ -17,7 +17,7 @@ const byLineAndColumn = (a, b) => {
   return 0;
 };
 
-test("rules", async t => {
+test("rules", async (t) => {
   const result = await stylelint.lint({
     configFile: "index.js",
     code: `
@@ -48,7 +48,7 @@ a.cls {
   t.end();
 });
 
-test("a11y", async t => {
+test("a11y", async (t) => {
   const result = await stylelint.lint({
     configFile: "index.js",
     code: `
@@ -79,7 +79,7 @@ test("a11y", async t => {
   t.end();
 });
 
-test("order", async t => {
+test("order", async (t) => {
   const result = await stylelint.lint({
     configFile: "index.js",
     code: `
