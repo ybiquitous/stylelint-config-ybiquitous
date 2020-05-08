@@ -19,7 +19,7 @@
     "stylelint-order": "4"
   },
   "devDependencies": {
-    "eslint-config-ybiquitous": "^10.10.1",
+    "eslint-config-ybiquitous": "^10.11.0",
     "stylelint": "^13.3.3",
     "stylelint-a11y": "^1.2.3",
     "stylelint-config-standard": "^20.0.0",
