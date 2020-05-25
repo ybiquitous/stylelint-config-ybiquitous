@@ -24,7 +24,7 @@
     "stylelint-a11y": "^1.2.3",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.0.0",
-    "tape": "^5.0.0",
+    "tape": "^5.0.1",
     "ybiq": "^11.0.0"
   },
   "scripts": {
