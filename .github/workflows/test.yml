@@ -1,28 +1,24 @@
 name: Test
 
-on: [push]
+on:
+  push:
+    branches: ["master"]
+    tags: ["**"]
+  pull_request:
+    branches: ["**"]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
-
+        node-version: ["10", "12", "14"]
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2.1.0
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run prettier:check
       - run: npm run release:dry-run
       - run: npm test
-      - uses: wagoid/commitlint-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          configFile: package.json
