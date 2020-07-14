@@ -13,10 +13,10 @@
     "node": ">=10"
   },
   "peerDependencies": {
-    "stylelint": "13",
-    "stylelint-a11y": "1",
-    "stylelint-config-standard": "20",
-    "stylelint-order": "4"
+    "stylelint": ">=13.6.1",
+    "stylelint-a11y": ">=1.2.3",
+    "stylelint-config-standard": ">=20.0.0",
+    "stylelint-order": ">=4.1.0"
   },
   "devDependencies": {
     "eslint-config-ybiquitous": "^10.11.0",
