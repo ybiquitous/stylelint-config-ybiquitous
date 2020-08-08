@@ -28,7 +28,6 @@
     "ybiq": "^11.4.2"
   },
   "scripts": {
-    "pretest": "npm run lint",
     "test": "node test.js",
     "test:watch": "echo \"unsupported.\" && exit 1",
     "test:coverage": "echo \"unsupported.\" && exit 1",
