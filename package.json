@@ -25,13 +25,15 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.1.0",
     "tape": "^5.0.1",
-    "ybiq": "^11.3.0"
+    "ybiq": "^11.4.2"
   },
   "scripts": {
     "pretest": "npm run lint",
     "test": "node test.js",
+    "test:watch": "echo \"unsupported.\" && exit 1",
+    "test:coverage": "echo \"unsupported.\" && exit 1",
     "format": "npm-run-all --print-label --parallel lint:*:fix prettier:write",
-    "lint": "npm-run-all --print-label --parallel lint:*",
+    "lint": "npm-run-all --print-label --parallel lint:* prettier:check",
     "lint:js": "eslint .",
     "lint:js:fix": "npm run lint:js -- --fix",
     "lint:md": "remark . --frail",
@@ -39,19 +41,20 @@
     "prettier": "prettier --ignore-path .gitignore .",
     "prettier:write": "npm run prettier -- --write",
     "prettier:check": "npm run prettier -- --check",
-    "prerelease": "git checkout master && git pull origin master && npm ci && npm test",
+    "prerelease": "git switch main && git pull && npm ci && npm test",
     "release": "standard-version",
     "release:dry-run": "standard-version --dry-run"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "post-commit": "npm run release:dry-run"
     }
   },
   "lint-staged": {
     "*.{js,jsx,mjs,ts,tsx}": "eslint --fix",
-    "*": "prettier --write",
+    "!(*.snap)": "prettier --write",
     "!(CHANGELOG).md": "remark --frail"
   },
   "eslintConfig": {
@@ -76,14 +79,11 @@
     ],
     "rules": {
       "body-max-line-length": [
-        2,
+        1,
         "always",
-        200
+        100
       ]
     }
-  },
-  "prettier": {
-    "trailingComma": "es5"
   },
   "standard-version": {
     "scripts": {
