@@ -13,19 +13,15 @@
     "node": ">=12"
   },
   "peerDependencies": {
-    "stylelint": ">=13.6.1",
+    "stylelint": ">=13.12.0",
     "stylelint-a11y": ">=1.2.3",
-    "stylelint-config-standard": ">=20.0.0",
+    "stylelint-config-standard": ">=21.0.0",
     "stylelint-order": ">=4.1.0"
   },
   "devDependencies": {
-    "eslint-config-ybiquitous": "^12.7.0",
-    "stylelint": "^13.12.0",
-    "stylelint-a11y": "^1.2.3",
-    "stylelint-config-standard": "^20.0.0",
-    "stylelint-order": "^4.1.0",
+    "eslint-config-ybiquitous": "^13.0.0",
     "tape": "^5.2.2",
-    "ybiq": "^11.6.2"
+    "ybiq": "^12.0.2"
   },
   "scripts": {
     "test": "node test.js",
@@ -43,14 +39,8 @@
     "prerelease": "git switch main && git pull && npm ci && npm run clean && npm test && npm run lint && npm run clean",
     "release": "standard-version",
     "release:dry-run": "standard-version --dry-run",
-    "clean": "git clean -dx --force --exclude=node_modules"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged",
-      "post-commit": "npm run release:dry-run"
-    }
+    "clean": "git clean -dx --force --exclude=node_modules --exclude=.husky",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,jsx,mjs,ts,tsx}": "eslint --fix",
