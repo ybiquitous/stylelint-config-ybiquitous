@@ -2,7 +2,7 @@
   "name": "stylelint-config-ybiquitous",
   "version": "0.0.1",
   "description": "My shareable config for stylelint",
-  "author": "Masafumi Koba <ybiquitous@gmail.com>",
+  "author": "Masafumi Koba",
   "license": "MIT",
   "repository": "ybiquitous/stylelint-config-ybiquitous",
   "main": "index.js",
@@ -20,8 +20,9 @@
   },
   "devDependencies": {
     "eslint-config-ybiquitous": "^13.0.0",
+    "remark-preset-ybiquitous": "^0.0.4",
     "tape": "^5.2.2",
-    "ybiq": "^12.0.2"
+    "ybiq": "^13.0.0"
   },
   "scripts": {
     "test": "node test.js",
@@ -52,6 +53,11 @@
     "extends": [
       "ybiquitous/node"
     ],
+    "ignorePatterns": [
+      "coverage",
+      "dist"
+    ],
+    "reportUnusedDisableDirectives": true,
     "overrides": [
       {
         "files": [
@@ -83,17 +89,7 @@
   },
   "remarkConfig": {
     "plugins": [
-      "preset-lint-recommended",
-      "lint-no-heading-punctuation",
-      [
-        "lint-list-item-bullet-indent",
-        false
-      ],
-      [
-        "lint-list-item-indent",
-        false
-      ],
-      "validate-links"
+      "remark-preset-ybiquitous"
     ]
   },
   "stylelint": {
