@@ -21,7 +21,7 @@
   "devDependencies": {
     "eslint-config-ybiquitous": "^13.0.0",
     "remark-preset-ybiquitous": "^0.0.5",
-    "tape": "^5.4.0",
+    "tape": "^5.5.0",
     "ybiq": "^13.2.1"
   },
   "scripts": {
