@@ -1,5 +1,4 @@
 const stylelint = require("stylelint");
-const test = require("tape");
 
 const byLineAndColumn = (a, b) => {
   if (a.line < b.line) {
@@ -17,7 +16,7 @@ const byLineAndColumn = (a, b) => {
   return 0;
 };
 
-test("rules", async (t) => {
+test("rules", async () => {
   const result = await stylelint.lint({
     configFile: "index.js",
     code: `
@@ -27,9 +26,9 @@ a.cls {
 `,
   });
 
-  t.is(result.errored, true);
-  t.is(result.results.length, 1);
-  t.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
+  expect(result.errored).toBe(true);
+  expect(result.results).toHaveLength(1);
+  expect(result.results[0].warnings.sort(byLineAndColumn)).toEqual([
     {
       line: 2,
       column: 1,
@@ -45,10 +44,9 @@ a.cls {
       text: 'Give the unitless value for "line-height". See https://mzl.la/2TflJo5',
     },
   ]);
-  t.end();
 });
 
-test("a11y", async (t) => {
+test("a11y", async () => {
   const result = await stylelint.lint({
     configFile: "index.js",
     code: `
@@ -58,8 +56,8 @@ test("a11y", async (t) => {
 `,
   });
 
-  t.is(result.errored, true);
-  t.is(result.results.length, 1);
+  expect(result.errored).toBe(true);
+  expect(result.results).toHaveLength(1);
 
   // HACK: Column is different between Node 10 and Node 12. Why…?
   let expectedColumn = 6;
@@ -67,7 +65,7 @@ test("a11y", async (t) => {
     expectedColumn = 5;
   }
 
-  t.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
+  expect(result.results[0].warnings.sort(byLineAndColumn)).toEqual([
     {
       line: 2,
       column: expectedColumn,
@@ -76,10 +74,9 @@ test("a11y", async (t) => {
       text: 'Unexpected using "outline" property in .foo:focus (a11y/no-outline-none)',
     },
   ]);
-  t.end();
 });
 
-test("order", async (t) => {
+test("order", async () => {
   const result = await stylelint.lint({
     configFile: "index.js",
     code: `
@@ -97,10 +94,10 @@ a {
 `,
   });
 
-  t.is(result.errored, true);
-  t.is(result.results.length, 1);
+  expect(result.errored).toBe(true);
+  expect(result.results).toHaveLength(1);
 
-  t.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
+  expect(result.results[0].warnings.sort(byLineAndColumn)).toEqual([
     {
       line: 5,
       column: 3,
@@ -116,5 +113,4 @@ a {
       text: "Expected declaration to come before at-rule (order/order)",
     },
   ]);
-  t.end();
 });
