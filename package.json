@@ -28,8 +28,8 @@
   "scripts": {
     "pretest": "npm run lint",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "test:watch": "npm --ignore-scripts test -- --watch",
+    "test:coverage": "npm --ignore-scripts test -- --coverage",
     "format": "npm-run-all --print-label --silent --parallel lint:*:fix",
     "lint": "npm-run-all --print-label --silent --parallel lint:*",
     "lint:js": "eslint --cache --ext=js,jsx,cjs,mjs,ts,tsx .",
