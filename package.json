@@ -105,5 +105,8 @@
   },
   "stylelint": {
     "extends": "./index.js"
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }
