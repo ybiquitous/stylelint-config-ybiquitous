@@ -10,7 +10,7 @@
     "CHANGELOG.md"
   ],
   "engines": {
-    "node": ">=16"
+    "node": ">=18.0.0"
   },
   "peerDependencies": {
     "stylelint": ">=13.12.0",
