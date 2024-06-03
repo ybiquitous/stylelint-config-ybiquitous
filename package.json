@@ -39,18 +39,17 @@
     "lint:styles": "npm run prettier -- --check",
     "lint:styles:fix": "npm run prettier -- --write",
     "lint:commit": "commitlint --from HEAD~10",
-    "prettier": "prettier --cache --ignore-path .gitignore .",
+    "prettier": "prettier --cache .",
     "prerelease": "git switch main && git pull && npm ci && npm run clean && npm test && npm run clean",
     "release": "standard-version",
     "release:dry-run": "standard-version --dry-run",
     "clean": "git clean -dx --force --exclude=node_modules --exclude=.husky",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "lint-staged": {
-    "*.{js,jsx,mjs,ts,tsx}": "eslint --fix",
-    "!(*.snap)": "prettier --cache --write",
-    "!(CHANGELOG).md": "remark --frail",
-    "*.{js,jsx,cjs,mjs,ts,tsx}": "eslint --cache --fix"
+    "*.{js,jsx,cjs,mjs,ts,tsx}": "eslint --cache --fix",
+    "!(**/*.snap|.husky/**)": "prettier --cache --write",
+    "!(CHANGELOG).md": "remark --frail"
   },
   "eslintConfig": {
     "root": true,
@@ -88,7 +87,12 @@
       "body-max-line-length": [
         1,
         "always",
-        200
+        320
+      ],
+      "header-max-length": [
+        1,
+        "always",
+        120
       ]
     }
   },
