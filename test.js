@@ -1,3 +1,6 @@
+const assert = require("node:assert/strict");
+const test = require("node:test");
+
 const stylelint = require("stylelint");
 
 const byLineAndColumn = (a, b) => {
@@ -26,9 +29,9 @@ a.cls {
 `,
   });
 
-  expect(result.errored).toBe(true);
-  expect(result.results).toHaveLength(1);
-  expect(result.results[0].warnings.sort(byLineAndColumn)).toEqual([
+  assert.equal(result.errored, true);
+  assert.equal(result.results.length, 1);
+  assert.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
     {
       line: 2,
       column: 1,
@@ -56,8 +59,8 @@ test("a11y", async () => {
 `,
   });
 
-  expect(result.errored).toBe(true);
-  expect(result.results).toHaveLength(1);
+  assert.equal(result.errored, true);
+  assert.equal(result.results.length, 1);
 
   // HACK: Column is different between Node 10 and Node 12. Why…?
   let expectedColumn = 6;
@@ -65,7 +68,7 @@ test("a11y", async () => {
     expectedColumn = 5;
   }
 
-  expect(result.results[0].warnings.sort(byLineAndColumn)).toEqual([
+  assert.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
     {
       line: 2,
       column: expectedColumn,
@@ -94,10 +97,10 @@ a {
 `,
   });
 
-  expect(result.errored).toBe(true);
-  expect(result.results).toHaveLength(1);
+  assert.equal(result.errored, true);
+  assert.equal(result.results.length, 1);
 
-  expect(result.results[0].warnings.sort(byLineAndColumn)).toEqual([
+  assert.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
     {
       line: 5,
       column: 3,
