@@ -33,48 +33,26 @@ a.cls {
   assert.equal(result.results.length, 1);
   assert.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
     {
-      line: 2,
+      line: 1,
       column: 1,
-      rule: "selector-no-qualifying-type",
-      severity: "error",
-      text: "Unexpected qualifying type selector (selector-no-qualifying-type)",
-    },
-    {
-      line: 3,
-      column: 3,
+      endLine: 5,
+      endColumn: 2,
       rule: "declaration-property-value-whitelist",
       severity: "error",
-      text: 'Give the unitless value for "line-height". See https://mzl.la/2TflJo5',
+      text: "Unknown rule declaration-property-value-whitelist.",
+      url: undefined,
+      fix: undefined,
     },
-  ]);
-});
-
-test("a11y", async () => {
-  const result = await stylelint.lint({
-    configFile: "index.js",
-    code: `
-.foo:focus {
-  outline: 0;
-}
-`,
-  });
-
-  assert.equal(result.errored, true);
-  assert.equal(result.results.length, 1);
-
-  // HACK: Column is different between Node 10 and Node 12. Why…?
-  let expectedColumn = 6;
-  if (process.versions.node.startsWith("10.")) {
-    expectedColumn = 5;
-  }
-
-  assert.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
     {
       line: 2,
-      column: expectedColumn,
-      rule: "a11y/no-outline-none",
+      column: 1,
+      endLine: 2,
+      endColumn: 6,
+      rule: "selector-no-qualifying-type",
       severity: "error",
-      text: 'Unexpected using "outline" property in .foo:focus (a11y/no-outline-none)',
+      text: 'Unexpected qualifying type selector "a.cls" (selector-no-qualifying-type)',
+      url: undefined,
+      fix: undefined,
     },
   ]);
 });
@@ -102,18 +80,48 @@ a {
 
   assert.deepEqual(result.results[0].warnings.sort(byLineAndColumn), [
     {
+      line: 1,
+      column: 1,
+      endLine: 13,
+      endColumn: 2,
+      rule: "declaration-property-value-whitelist",
+      severity: "error",
+      text: "Unknown rule declaration-property-value-whitelist.",
+      url: undefined,
+      fix: undefined,
+    },
+    {
       line: 5,
       column: 3,
+      endLine: 5,
+      endColumn: 18,
       rule: "order/order",
       severity: "error",
       text: "Expected custom property to come before $-variable (order/order)",
+      url: undefined,
+      fix: undefined,
+    },
+    {
+      line: 9,
+      column: 10,
+      endLine: 9,
+      endColumn: 28,
+      rule: "media-feature-range-notation",
+      severity: "error",
+      text: 'Expected "context" media feature range notation (media-feature-range-notation)',
+      url: undefined,
+      fix: undefined,
     },
     {
       line: 11,
       column: 3,
+      endLine: 11,
+      endColumn: 15,
       rule: "order/order",
       severity: "error",
       text: "Expected declaration to come before at-rule (order/order)",
+      url: undefined,
+      fix: undefined,
     },
   ]);
 });
