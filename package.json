@@ -19,8 +19,8 @@
   },
   "devDependencies": {
     "eslint-config-ybiquitous": "^22.0.0",
-    "remark-preset-ybiquitous": "^0.5.0",
-    "ybiq": "^19.0.1"
+    "remark-preset-ybiquitous": "^0.5.1",
+    "ybiq": "^21.0.1"
   },
   "scripts": {
     "pretest": "npm run lint",
